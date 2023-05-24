@@ -9,8 +9,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
-
-const KEY = process.env.REACT_APP_STRIPE;
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -39,15 +38,6 @@ const TopButton = styled.button`
   background-color: ${(props) =>
     props.type === "filled" ? "black" : "transparent"};
   color: ${(props) => props.type === "filled" && "white"};
-`;
-
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })}
-`;
-const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 10px;
 `;
 
 const Bottom = styled.div`
@@ -187,14 +177,21 @@ const Cart = () => {
       <Navbar />
       <Announcement />
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>Giỏ Hàng</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <Link to="/">
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
+          <StripeCheckout
+              name="Hiep Nguyen Shop"
+              image="https://avatars.githubusercontent.com/u/30675552?s=400&u=c6bfcb4c6403013aed1ac09392ca4acce9fca180&v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}>
+            <TopButton type="filled">CHECKOUT NOW</TopButton>
+          </StripeCheckout>
         </Top>
         <Bottom>
           <Info>
@@ -248,14 +245,13 @@ const Cart = () => {
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="Lama Shop"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              name="Hiep Nguyen Shop"
+              image="https://avatars.githubusercontent.com/u/30675552?s=400&u=c6bfcb4c6403013aed1ac09392ca4acce9fca180&v=4"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
-              stripeKey={KEY}
             >
               <Button>CHECKOUT NOW</Button>
             </StripeCheckout>
