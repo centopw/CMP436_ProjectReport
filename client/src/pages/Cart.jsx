@@ -1,7 +1,6 @@
 import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
@@ -153,11 +152,17 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
+  // const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
   };
-
+  // const handleAdd = (product) => {
+  //   dispatchEvent(addToCart(product));
+  // };
+  // const handleRemove = (product) => { 
+  //   dispatchEvent(removeFromCart(product));
+  // };
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -171,11 +176,10 @@ const Cart = () => {
       } catch {}
     };
     stripeToken && makeRequest();
-  }, [stripeToken, cart.total, history]);
+  }, [stripeToken, cart.total, history, cart]);
   return (
     <Container>
       <Navbar />
-      <Announcement />
       <Wrapper>
         <Title>Giỏ Hàng</Title>
         <Top>
