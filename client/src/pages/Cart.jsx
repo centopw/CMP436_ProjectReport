@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-
+// import { addProduct, removeProduct } from "../redux/cartRedux";
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -157,11 +157,13 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
+  // TODO: Fix this error
+
   // const handleAdd = (product) => {
-  //   dispatchEvent(addToCart(product));
+  //   dispatchEvent(addProduct(product));
   // };
   // const handleRemove = (product) => { 
-  //   dispatchEvent(removeFromCart(product));
+  //   dispatchEvent(removeProduct(product));
   // };
   useEffect(() => {
     const makeRequest = async () => {
@@ -218,9 +220,11 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
+                    {/* <Add onClick={() => handleAdd(product)} /> */}
                     <Add />
                     <ProductAmount>{product.quantity}</ProductAmount>
                     <Remove />
+                    {/* <Remove onClick={() => handleRemove(product)} /> */}
                   </ProductAmountContainer>
                   <ProductPrice>
                     $ {product.price * product.quantity}

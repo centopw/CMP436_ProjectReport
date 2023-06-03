@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import React, { useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -55,26 +57,51 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  // const handleChange = (e) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post("/api/auth/register", formData);
+  //     console.log(response.data); // Registration successful
+  //   } catch (error) {
+  //     console.log(error.response.data); // Registration failed
+  //   }
+  // };
+
+
   return (
-    <Container>
-      <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input type="text" placeholder="name" />
-          <Input type="text" placeholder="last name" />
-          <Input type="text" placeholder="username" />
-          <Input type="email" placeholder="email" />
-          <Input type="password" placeholder="password" />
-          <Input type="password" placeholder="confirm password" />
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button>CREATE</Button>
-        </Form>
-      </Wrapper>
-    </Container>
-  );
+      <Container>
+        <Wrapper>
+          <Title>CREATE AN ACCOUNT</Title>
+          <Form>
+            <Input type="text" placeholder="name" />
+            <Input type="text" placeholder="last name" />
+            <Input type="text" placeholder="username" />
+            <Input type="email" placeholder="email" />
+            <Input type="password" placeholder="password" />
+            <Input type="password" placeholder="confirm password" />
+            <Agreement>
+              By creating an account, I consent to the processing of my personal
+              data in accordance with the <b>PRIVACY POLICY</b>
+            </Agreement>
+            <Button>CREATE</Button>
+          </Form>
+        </Wrapper>
+      </Container>
+    );
 };
 
 export default Register;

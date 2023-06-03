@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const Container = styled.div`
   width: 100%;
@@ -88,7 +89,7 @@ const Slider = () => {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
   };
-
+  
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
