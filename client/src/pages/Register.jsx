@@ -57,29 +57,24 @@ const Button = styled.button`
 `;
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
 
-  // const handleChange = (e) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   try {
-  //     const response = await axios.post("/api/auth/register", formData);
-  //     console.log(response.data); // Registration successful
-  //   } catch (error) {
-  //     console.log(error.response.data); // Registration failed
-  //   }
-  // };
+    try {
+      const response = await axios.post("/api/auth/register", formData);
+      console.log(response.data); // Registration successful
+    } catch (error) {
+      console.log(error.response.data); // Registration failed
+    }
+  };
 
 
   return (
