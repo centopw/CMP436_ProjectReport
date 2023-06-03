@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+// import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../components/Footer";
@@ -10,6 +10,9 @@ import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 // import { addProduct, removeProduct } from "../redux/cartRedux";
+
+const KEY = process.env.REACT_APP_STRIPE;
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -195,14 +198,17 @@ const Cart = () => {
               shippingAddress
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
-              token={onToken}>
+              token={onToken}
+              stripeKey={KEY}
+          
+          >
             <TopButton type="filled">CHECKOUT NOW</TopButton>
           </StripeCheckout>
         </Top>
         <Bottom>
           <Info>
             {cart.products.map((product) => (
-              <Product>
+              <Product key={product._id}>
                 <ProductDetail>
                   <Image src={product.img} />
                   <Details>
@@ -221,9 +227,7 @@ const Cart = () => {
                 <PriceDetail>
                   <ProductAmountContainer>
                     {/* <Add onClick={() => handleAdd(product)} /> */}
-                    <Add />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
                     {/* <Remove onClick={() => handleRemove(product)} /> */}
                   </ProductAmountContainer>
                   <ProductPrice>
@@ -260,6 +264,7 @@ const Cart = () => {
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
+              stripeKey={KEY}
             >
               <Button>CHECKOUT NOW</Button>
             </StripeCheckout>
