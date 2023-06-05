@@ -182,6 +182,19 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history, cart]);
+  
+  // TODO: add new product to cart with the same ID don't add as new item
+
+  // const groupItems = cart.products.reduce((acc, item) => {
+  //   const existingProduct = acc.find((p) => p._id === product._id);
+  //   if (existingProduct) {
+  //     existingProduct.quantity += product.quantity;
+  //   } else { 
+  //     acc.push( ...product);
+  //   }
+  //   return acc;
+  // });
+
   return (
     <Container>
       <Navbar />
